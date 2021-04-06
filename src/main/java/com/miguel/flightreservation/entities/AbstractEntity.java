@@ -5,8 +5,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 
-
-
+/**/
 //Designa una clase cuya información de asignación se aplica a las entidades que heredan de ella. 
 //Una superclase asignada no tiene ninguna tabla independiente definida para ella
 @MappedSuperclass
