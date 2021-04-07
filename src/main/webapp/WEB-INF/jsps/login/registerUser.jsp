@@ -7,7 +7,7 @@
 <title>Registro de usuarios</title>
 </head>
 <body>
-  <!-- Formulario de registro de usuario -->
+  <!-- Formulario de registro de usuario. -->
   <form action="registerUser" method="post">
    <pre>
      Primer nombre: <input type="text" name="firstName"/>
