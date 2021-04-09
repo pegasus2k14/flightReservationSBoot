@@ -11,7 +11,7 @@ import javax.persistence.MappedSuperclass;
 @MappedSuperclass
 public class AbstractEntity {
 	@Id   //indicamos q este atributo es la llave primaria
-	@GeneratedValue(strategy = GenerationType.AUTO) //indicamos q este campo se incrementara automaticamente en la BD
+	@GeneratedValue(strategy = GenerationType.IDENTITY) //indicamos q este campo se incrementara automaticamente en la BD
 	private long id;
 
 	//Getters y Setters

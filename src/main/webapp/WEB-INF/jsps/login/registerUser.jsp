@@ -10,6 +10,7 @@
   <!-- Formulario de registro de usuario. -->
   <form action="registerUser" method="post">
    <pre>
+     <h2>Registro de usuario:</h2>
      Primer nombre: <input type="text" name="firstName"/>
      Apellido: <input type="text" name="lastName"/>
      User name: <input type="text" name="email"/>
