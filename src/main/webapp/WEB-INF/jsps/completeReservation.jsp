@@ -26,7 +26,7 @@
     <h2>Credit Card Details</h2>
     Name on the Card: <input type="text" name="nameOnTheCard">
     Card number: <input type="text" name="cardNumber">
-    Expiry Date: <input type="text" name="expirationDatee">
+    Expiry Date: <input type="text" name="expirationDate">
     Three Digit Sec. Code: <input type="text" name="secCode">
     
     <input type="submit" value="Confirm">

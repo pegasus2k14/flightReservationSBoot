@@ -7,7 +7,7 @@ public class Passenger extends AbstractEntity{
 	//Atributos
 	private String firstName;
 	private String lastName;
-	private String midleName;
+	private String middleName;
 	private String email;
 	private String phone;
 	
@@ -24,11 +24,11 @@ public class Passenger extends AbstractEntity{
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
-	public String getMidleName() {
-		return midleName;
+	public String getMiddleName() {
+		return middleName;
 	}
-	public void setMidleName(String midleName) {
-		this.midleName = midleName;
+	public void setMiddleName(String middleName) {
+		this.middleName = middleName;
 	}
 	public String getEmail() {
 		return email;

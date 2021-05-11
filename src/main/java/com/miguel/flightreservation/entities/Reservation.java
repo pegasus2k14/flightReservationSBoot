@@ -2,7 +2,9 @@ package com.miguel.flightreservation.entities;
 
 import java.sql.Timestamp;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 
 @Entity
@@ -11,9 +13,11 @@ public class Reservation extends AbstractEntity{
 	private Boolean checkedIn;
 	private int numberOfBags;
     @OneToOne         //relacion uno a uno entre Reservacion y pasajero
+    @JoinColumn(name = "passenger_id", referencedColumnName = "id")
 	private Passenger passengerId;
     @OneToOne         //relacion uno a uno entre Reservacion y vuelo
-	private Flight flightId;
+	@JoinColumn(name = "flight_id", referencedColumnName = "id")
+    private Flight flightId;
 	private Timestamp created;
 	
 	public Boolean getCheckedIn() {
