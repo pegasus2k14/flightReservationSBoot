@@ -32,6 +32,12 @@ public class UserController {
 	}
 	
 	
+	//Metodo para direccionar a la pagina de Login de usuarios
+		@RequestMapping("/showLogin")  //path para acceder al metodo
+		public String showLoginPage() {
+		  return "/login/login";	
+		}
+		
 	@RequestMapping(value = "/login",method = RequestMethod.POST)
 	public String userLogin(@RequestParam("email") String email, @RequestParam("password") String password, ModelMap modelMap) {
 		
