@@ -10,6 +10,8 @@ import com.miguel.flightreservation.entities.Reservation;
 import com.miguel.flightreservation.repos.FlightRepository;
 import com.miguel.flightreservation.repos.PassengerRepository;
 import com.miguel.flightreservation.repos.ReservationRepository;
+import com.miguel.flightreservation.util.EmailUtil;
+import com.miguel.flightreservation.util.PDFGenerator;
 
 @Service
 public class ReservationServiceImpl implements ReservationService{
@@ -25,8 +27,16 @@ public class ReservationServiceImpl implements ReservationService{
 	//Inyectamos el respositorio de Reservaciones
 	@Autowired
 	private ReservationRepository reservationRepository;
-
-	@Override
+	
+	//Inyectamos la Clase PDFGenerator.java
+	@Autowired
+	private PDFGenerator pdfGenerator;
+	//Inyectamos la Clase EmailUtil.java
+    @Autowired
+	private EmailUtil emailUtil;
+    
+	//Metodo que se ocupa de crear una reservacion
+    @Override
 	public Reservation bookFlight(ReservationRequest request) {
 		//Realizar Pago mediante una pasarela de Pagos
 		   //Aqui se podria recuperar la informacion de la targeta de credito y apoyarse en un 
@@ -57,6 +67,13 @@ public class ReservationServiceImpl implements ReservationService{
 		
 		//Persistimos la Reservacion
 		Reservation savedReservation = reservationRepository.save(reservation);
+		
+		//Generamos el PDF con el itinerario
+		String filePath = "C:\\Users\\m_ang\\Documents\\reservaciones\\reservation"+savedReservation.getId()+".pdf";
+		pdfGenerator.generateItinerary(savedReservation, filePath);
+		
+		//Enviamos el archivo con el itinerario por Email
+		emailUtil.sendItinerary(savedPassenger.getEmail(), filePath);
 		
 		return savedReservation;
 	}
