@@ -3,6 +3,7 @@ package com.miguel.flightreservation.services;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import com.miguel.flightreservation.dto.ReservationRequest;
@@ -18,6 +19,10 @@ import com.miguel.flightreservation.util.PDFGenerator;
 @Service
 public class ReservationServiceImpl implements ReservationService{
 	
+	//Inyectamos una propiedad desde application.properties
+	@Value("${com.miguel.flightreservation.itinerary.dir}")
+	private String ITINERARY_DIR;
+
 	//inyectamos el repositorio del Vuelo
 	@Autowired
 	private FlightRepository flightRepository;
@@ -79,7 +84,7 @@ public class ReservationServiceImpl implements ReservationService{
 		Reservation savedReservation = reservationRepository.save(reservation);
 		
 		//Generamos el PDF con el itinerario
-		String filePath = "C:\\Users\\m_ang\\Documents\\reservaciones\\reservation"+savedReservation.getId()+".pdf";
+		String filePath = ITINERARY_DIR+savedReservation.getId()+".pdf";
 		
 		LOGGER.info("Generating the Itinerary");
 		pdfGenerator.generateItinerary(savedReservation, filePath);
