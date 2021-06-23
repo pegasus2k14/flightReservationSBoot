@@ -5,6 +5,8 @@ import java.io.File;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -16,10 +18,14 @@ public class EmailUtil {
 	//Inyectamos una instancia de JavaMailSender
 	@Autowired
 	private JavaMailSender mailSender;
+	
+	private static final Logger LOGGER = LoggerFactory.getLogger(EmailUtil.class);
   
 	//metodo para enviar el archivo pdf con el intinerario por Email
 	//recibe dos parametros (destinatario del Email, ubicacion del archivo PDF)
 	public void sendItinerary(String toAddress, String filePath) {
+		LOGGER.info("Inside method sendItinerary() toAddress: "+toAddress + " filePath: "+filePath);
+		
 		//Creamos una instancia de MimeMessage
 		MimeMessage message = mailSender.createMimeMessage();
 		
@@ -38,8 +44,9 @@ public class EmailUtil {
 			mailSender.send(message);
 			
 		} catch (MessagingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			LOGGER.error("Exception inside sendItinerary() "+ e);
+			
+			//e.printStackTrace();
 		}
 	}
 }

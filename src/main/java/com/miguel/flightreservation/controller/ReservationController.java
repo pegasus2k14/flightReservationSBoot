@@ -1,5 +1,7 @@
 package com.miguel.flightreservation.controller;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -24,9 +26,14 @@ public class ReservationController {
   //inyectando la Clase Service ReservationService
   @Autowired
   private ReservationService reservationService;
+  
+  //instancia de Logger
+  private static final Logger LOGGER = LoggerFactory.getLogger(ReservationController.class);
 	
   @RequestMapping("showCompleteReservation")
 	public String showCompleteReservation(@RequestParam("flightId") long flightId, ModelMap modelMap) {
+	    
+	    LOGGER.info("Inside method showCompleteReservation() flightId "+flightId);
 		
 		//Recuperamos el vuelo que fue seleccionado en el formulario
 		Flight flight = flightRepository.findById(flightId).get();
@@ -34,6 +41,7 @@ public class ReservationController {
 		//Agregando el Vuelo al ModelMap para que se comparta a la vista
 		modelMap.addAttribute("flight", flight);
 		
+		LOGGER.info("Flight is: " + flight);
 		//retornamos la vista
 		return "completeReservation";
 	}
@@ -41,6 +49,8 @@ public class ReservationController {
   
   @RequestMapping(value = "/completeReservation", method = RequestMethod.POST)
   public String completeReservation(@ModelAttribute("reservation") ReservationRequest request, ModelMap modelMap ) {
+	  
+	  LOGGER.info("Inside method completeReservation() request: "+request);
 	  
 	  Reservation reservation = reservationService.bookFlight(request);
 	  

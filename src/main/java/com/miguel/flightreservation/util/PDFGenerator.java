@@ -3,6 +3,8 @@ package com.miguel.flightreservation.util;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import com.itextpdf.text.Document;
@@ -15,8 +17,12 @@ import com.miguel.flightreservation.entities.Reservation;
 
 @Component //indicamos que sera un componente de Spring
 public class PDFGenerator {
+	
+	private static final Logger LOGGER = LoggerFactory.getLogger(EmailUtil.class);
   
 	public void generateItinerary(Reservation reservation, String filePath) {
+		LOGGER.info("Inside Method generateItinerary()");
+		
 		//creamos una instancia de Document de 'pdfItext' 
 		Document document = new Document();
 		
@@ -33,13 +39,15 @@ public class PDFGenerator {
 				//Cerramos el documento
 				document.close();
 			} catch (FileNotFoundException | DocumentException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				
+				LOGGER.error("Exception in generateItinerary() "+e);
+				//e.printStackTrace();
 			}
 		
 	}
 	
 	private PdfPTable generateTable(Reservation reservation) {
+		
 		  //Creamos una instancia de PdfPTable con dos columnas
 		  PdfPTable table = new PdfPTable(2);
 		  //Creamos la primera celda con un texto

@@ -70,5 +70,13 @@ public class ReservationRequest {
 	public void setSecCode(String secCode) {
 		this.secCode = secCode;
 	}
+	@Override
+	public String toString() {
+		return "ReservationRequest [flightId=" + flightId + ", passengerFirstName=" + passengerFirstName
+				+ ", passengerLastName=" + passengerLastName + ", passengerEmail=" + passengerEmail
+				+ ", passengerPhone=" + passengerPhone + ", nameOnTheCard=" + nameOnTheCard + ", cardNumber="
+				+ cardNumber + ", expirationDate=" + expirationDate + ", secCode=" + secCode + "]";
+	}
+	
 	
 }
